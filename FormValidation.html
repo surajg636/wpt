@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <h1>Form</h1>
+        <style>
+            .myForm{
+                font-size: 20px;
+                background-color: beige;
+            }
+
+            .myForm input{
+                width: 50%;
+                height: 3%;
+                border: 1px solid blue;
+                margin: 15px;
+                border-radius: 2px;
+            }
+
+            .error{
+                color: red;
+            }
+
+            .btn{
+                color: blue;
+                border-radius: 5px;
+                width: 10%;
+                height: 4%;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="myaction" name="myform" onsubmit="return validateform()" method="post">
+        <div class="myForm" id="name">
+            Name: <input type="text" id="name">&nbsp;<span class="error"></span><br>
+            Email: <input type="text" id="email">&nbsp;<span class="error"></span><br>
+            Phone: <input type="text" id="phone">&nbsp;<span class="error"></span><br>
+            <button class="btn" type="submit">Submit</button>
+        </div>
+        </form>
+        
+    </body>
+
+    <script>
+        function seterror(id,error){
+            element=document.getElementById(id);
+            element.getElementsByClassName("error")[0].innerHTML=error;
+        }
+
+        function validateform(){
+            var returnval=true;
+            var name=document.forms["myform"]["name"].value;
+            if(name.length<6){
+                seterror("name","*Length of name is too short");
+                returnval=false;
+            }
+
+            return returnval;
+        ;
+        }
+    </script>
+</html>

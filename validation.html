@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <script>
+            str=""
+            validateRadio=(radioname,er)=>{
+                //console.log("in validateradio")
+                var radios=document.getElementsByName(radioname)
+               // console.log(radios)
+                var formvalid=false;
+                var val=""
+                for(var i=0;i<radios.length;i++)
+                {
+                    if(radios[i].checked)
+                    {
+                       // console.log("in validateradio if")
+                        formvalid=true;
+                        val=radios[i].value;
+                        str=str+""+val
+                        //console.log(str)
+                        break;
+                    }
+                }
+                console.log(formvalid)
+                if(!formvalid)
+                {
+                    document.getElementById(er).innerHTML="Select option";
+                    return false;
+                }
+                else{
+                    document.getElementById(er).innerHTML="";
+                    return true;
+                }
+                
+                
+            }
+
+            validateDropdown=(dpname)=>{
+                var val=document.getElementById(dpname).value
+                str=str+" "+val
+                return true;
+            }
+
+            validateCheckbox=(chkname,er)=>{
+                var chkboxs=document.getElementsByName(chkname);
+                var count=0;
+                var vals=""
+                for(var i=0;i<chkboxs.length;i++)
+                {
+                    if(chkboxs[i].checked)
+                    {
+                        count++;
+                        vals=vals+""+chkboxs[i].value
+                    }
+                }
+                console.log(vals)
+                console.log(count)
+                if(count<2)
+                {
+                    document.getElementById(er).innerHTML="//Select atleast 2 boxes"
+                    return false;
+                }
+                else
+                {
+                    document.getElementById(er).innerHTML=""
+                    str=str+""+vals;
+                    return true;
+                }
+
+            }
+
+            display=()=>{
+                console.log("in display")
+                document.getElementById("mydiv").innerHTML=str
+            }
+
+            validate=()=>{
+                //console.log
+                console.log("in validate")
+                var flag1=validateRadio("option","er1")
+                //console.log(flag1)
+                var flag2=validateDropdown("city")
+                var flag3=validateCheckbox("skills","er2")
+                if(flag1 && flag2 && flag3)
+                {
+                    display();
+                }
+            }
+        </script>
+
+    </head>
+    <body>
+        <form>
+            <div>
+        <input type="radio" name="option" value="op1">OP1 <br>
+        <input type="radio" name="option"  value="op2"> Op2 <br>
+        <input type="radio" name="option"  value="op3"> Op3 <br>
+        <input type="radio" name="option"  value="op4"> Op4 <span id="er1"></span> <br>
+    </div>
+        <div>
+        <select name="city" id="city">
+            <option value="nsk">Nashik</option>
+            <option value="pune">Pune</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Anagar">Nagar</option>
+        </select> </div>
+        <div>
+        <input type="checkbox" name="skills" id="sk1">
+        <label for="sk1">Java</label>
+        <input type="checkbox" name="skills" id="sk2">
+        <label for="sk2">c++</label>
+        <input type="checkbox" name="skills" id="sk3">
+        <label for="sk3">python</label>
+        <input type="checkbox" name="skills" id="sk4">
+        <label for="sk4">react</label> <span id="er2"></span>
+    </div>
+        
+
+        <button type="button" onclick="validate()">Submit</button>
+        <div id="mydiv"></div>
+        </form>
+    </body>
+</html>
